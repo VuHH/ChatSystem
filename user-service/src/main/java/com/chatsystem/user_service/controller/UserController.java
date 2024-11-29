@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-  @Autowired private JwtUtil jwtUtil;
   @Autowired private UserService userService;
 
   //  @PostMapping("/filters")
