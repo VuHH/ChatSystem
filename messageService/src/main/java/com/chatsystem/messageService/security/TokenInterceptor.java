@@ -1,6 +1,6 @@
 package com.chatsystem.messageService.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
@@ -10,11 +10,9 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-
 @Component
 public class TokenInterceptor implements ClientHttpRequestInterceptor {
-  @Autowired private RestTemplate restTemplate;
+  private final RestTemplate restTemplate;
 
   @Value("${auth.address}")
   private String authAddress;
@@ -24,6 +22,10 @@ public class TokenInterceptor implements ClientHttpRequestInterceptor {
 
   @Value("${auth.password}")
   private String password;
+
+  public TokenInterceptor(RestTemplate restTemplate) {
+    this.restTemplate = restTemplate;
+  }
 
   @Override
   public ClientHttpResponse intercept(

@@ -20,7 +20,11 @@ import java.util.Map;
 @RequestMapping("/api/report")
 public class ReportController {
 
-  @Autowired ReportService reportService;
+  private final ReportService reportService;
+
+  public ReportController(ReportService reportService) {
+    this.reportService = reportService;
+  }
 
   @GetMapping("/numb-text")
   public List<Map> getNumberOfTextMessage(

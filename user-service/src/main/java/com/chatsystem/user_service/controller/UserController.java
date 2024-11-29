@@ -12,7 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-  @Autowired private KafkaProducerService kafkaProducerService;
+  private final KafkaProducerService kafkaProducerService;
+
+  public UserController(KafkaProducerService kafkaProducerService) {
+    this.kafkaProducerService = kafkaProducerService;
+  }
 
   //  @PostMapping("/filters")
   //  public String filter(@RequestBody String username) {

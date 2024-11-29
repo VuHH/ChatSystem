@@ -1,24 +1,25 @@
 package com.chatsystem.messageService.service;
 
 import com.chatsystem.messageService.entity.DetailMessage;
-import com.chatsystem.messageService.util.CSVUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 @Service
 public class ReportService {
-  @Autowired private MongoTemplate mongoTemplate;
+  private final MongoTemplate mongoTemplate;
 
-  public List<Map> getMessageCountByTimeRangeAndDisplayNames(
+    public ReportService(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
+
+    public List<Map> getMessageCountByTimeRangeAndDisplayNames(
       Instant startDate, Instant endDate, String displayNames) {
     Aggregation aggregation =
         Aggregation.newAggregation(
