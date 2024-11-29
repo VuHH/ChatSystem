@@ -7,17 +7,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+  private final UserRepository userRepository;
+  private final RedisService redisService;
 
-    public void saveUser(User user) {
-        User userFind = findUser(user.getPhoneNumber());
-        if (userFind != null) {
-            userRepository.save(user);
-        }
-    }
+  @Autowired
+  public UserService(UserRepository userRepository, RedisService redisService) {
+    this.userRepository = userRepository;
+    this.redisService = redisService;
+  }
 
-    public User findUser(String phoneNumber) {
-        return userRepository.findUserByPhoneNumber(phoneNumber);
+  public void saveUser(User user) {
+    User userFind = findUser(user.getPhoneNumber());
+    if (userFind != null) {
+      userRepository.save(user);
+      redisService.saveUser(user.getPhoneNumber(), user, 3600);
     }
+  }
+
+  public User findUser(String phoneNumber) {
+    if (redisService.isUserExist(phoneNumber)) {
+      return redisService.getUser(phoneNumber);
+    }
+    return userRepository.findUserByPhoneNumber(phoneNumber);
+  }
 }

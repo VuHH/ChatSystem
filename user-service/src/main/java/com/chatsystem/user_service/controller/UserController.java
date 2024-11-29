@@ -2,6 +2,7 @@ package com.chatsystem.user_service.controller;
 
 import com.chatsystem.user_service.entity.User;
 import com.chatsystem.user_service.security.JwtUtil;
+import com.chatsystem.user_service.service.KafkaProducerService;
 import com.chatsystem.user_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-  @Autowired private UserService userService;
+  @Autowired private KafkaProducerService kafkaProducerService;
 
   //  @PostMapping("/filters")
   //  public String filter(@RequestBody String username) {
@@ -21,7 +22,7 @@ public class UserController {
   @PostMapping
   public String addUser(@RequestBody List<User> users) {
     for (User u : users) {
-      userService.saveUser(u);
+      kafkaProducerService.sendUserEvent("user-topic", u);
     }
     return "Added users";
   }
