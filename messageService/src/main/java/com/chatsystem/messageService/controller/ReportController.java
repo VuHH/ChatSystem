@@ -2,7 +2,9 @@ package com.chatsystem.messageService.controller;
 
 import com.chatsystem.messageService.service.ReportService;
 import com.chatsystem.messageService.util.CSVUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.time.Instant;
+import java.util.List;
+import java.util.Map;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,10 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.Instant;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/report")

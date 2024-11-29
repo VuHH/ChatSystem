@@ -2,7 +2,6 @@ package com.chatsystem.user_service.security;
 
 import com.chatsystem.user_service.configuration.JwtInterceptor;
 import jakarta.servlet.Filter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

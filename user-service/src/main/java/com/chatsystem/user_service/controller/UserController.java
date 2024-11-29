@@ -1,13 +1,9 @@
 package com.chatsystem.user_service.controller;
 
 import com.chatsystem.user_service.entity.User;
-import com.chatsystem.user_service.security.JwtUtil;
 import com.chatsystem.user_service.service.KafkaProducerService;
-import com.chatsystem.user_service.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
