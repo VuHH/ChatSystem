@@ -8,13 +8,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
+    private final UserService userService;
 
     @Autowired
-    public ChatRoomService(ChatRoomRepository chatRoomRepository) {
+    public ChatRoomService(ChatRoomRepository chatRoomRepository, UserService userService) {
         this.chatRoomRepository = chatRoomRepository;
+        this.userService = userService;
     }
 
-    public ChatRoom createChatRoom(ChatRoom chatRoom) {
+    public ChatRoom createChatRoom(ChatRoom chatRoom) throws Exception {
+        userService.createUser(chatRoom.getMembers());
         return chatRoomRepository.save(chatRoom);
     }
 }

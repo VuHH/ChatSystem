@@ -19,7 +19,7 @@ public class ChatRoomController {
     }
 
     @PostMapping
-    public ChatRoom createRoom(@RequestBody ChatRoom chatRoom) {
+    public ChatRoom createRoom(@RequestBody ChatRoom chatRoom) throws Exception {
         return chatRoomService.createChatRoom(chatRoom);
     }
 }

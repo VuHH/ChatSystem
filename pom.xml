@@ -16,6 +16,7 @@
 
   <modules>
     <module>messageService</module>
+    <module>user-service</module>
   </modules>
 
   <properties>
